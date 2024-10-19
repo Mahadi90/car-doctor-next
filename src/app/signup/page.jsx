@@ -5,6 +5,24 @@ import React from 'react';
 import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
 
 const SignupPage = () => {
+    const handleSignUp = async(event) =>{
+      event.preventDefault()
+      const newUser = {
+        name : event.target.name.value,
+        email : event.target.email.value,
+        password : event.target.password.value,
+      }
+      const res = await fetch('http://localhost:3000/signup/api', {
+        method : 'POST',
+        body : JSON.stringify(newUser),
+        headers : {
+            'content-type' : 'application/json'
+        }
+      })
+      if(res.status === 200){
+        event.target.reset()
+      }
+    }
     return (
         <div className='lg:mx-12 px-2 lg:px-60 py-24'>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center">
@@ -13,7 +31,7 @@ const SignupPage = () => {
             </div>
             <div className='p-2 lg:p-12 border-2 rounded-md'>
             <h3 className='text-primary text-3xl font-semibold mb-2'>SignUp</h3>
-                <form action="">
+                <form onSubmit={handleSignUp}>
                     <div className='input-div my-2'>
                         <label htmlFor="name">name</label>
                         <input type="text" name='name' placeholder="Your Name" className="input input-bordered w-full" />
