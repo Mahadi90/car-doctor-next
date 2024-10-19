@@ -67,6 +67,7 @@ const Navbar = () => {
                 <AiOutlineShoppingCart className="w-6 h-6"></AiOutlineShoppingCart>
                 <IoSearchSharp className="w-6 h-6"></IoSearchSharp>
                 <a className="btn btn-outline btn-primary">Appointment</a>
+                <Link href='/login' className="btn btn-primary">Login</Link>
             </div>
         </div>
     );
