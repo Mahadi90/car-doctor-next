@@ -1,3 +1,5 @@
+'use client'
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -5,28 +7,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoSearchSharp } from "react-icons/io5";
 
 const Navbar = () => {
-    const navItems = [
-        {
-            path: '/',
-            item: 'Home',
-        },
-        {
-            path: '/about',
-            item: 'About',
-        },
-        {
-            path: '/service',
-            item: 'Service',
-        },
-        {
-            path: '/blog',
-            item: 'Blog',
-        },
-        {
-            path: '/contact',
-            item: 'Contact',
-        }
-    ]
+   const session = useSession()
     return (
         <div className="navbar bg-base-100 text-slate-900 py-6 lg:px-12">
             <div className="navbar-start">
@@ -52,7 +33,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <Link href='/'>
-                <Image alt="logo" src="/assets/logo.svg" width={60} height={100} />
+                <Image style={{width : 'auto', height : 'auto'}} priority={true} alt="logo"  src="/assets/logo.svg" width={60} height={60} />
                 </Link>
                
             </div>
@@ -67,10 +48,36 @@ const Navbar = () => {
                 <AiOutlineShoppingCart className="w-6 h-6"></AiOutlineShoppingCart>
                 <IoSearchSharp className="w-6 h-6"></IoSearchSharp>
                 <a className="btn btn-outline btn-primary">Appointment</a>
-                <Link href='/login' className="btn btn-primary">Login</Link>
+                {
+                    session.data? <button className="btn btn-primary" onClick={() => signOut()}>Logout</button> :
+                    <Link href='/login' className="btn btn-primary">Login</Link>
+                }
             </div>
         </div>
     );
 };
+
+const navItems = [
+    {
+        path: '/',
+        item: 'Home',
+    },
+    {
+        path: '/about',
+        item: 'About',
+    },
+    {
+        path: '/service',
+        item: 'Service',
+    },
+    {
+        path: '/blog',
+        item: 'Blog',
+    },
+    {
+        path: '/contact',
+        item: 'Contact',
+    }
+]
 
 export default Navbar;

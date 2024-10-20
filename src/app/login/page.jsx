@@ -2,18 +2,34 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import {signIn} from 'next-auth/react'
 import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+    const router = useRouter()
+    const handleLogin = async(event) => {
+        event.preventDefault()
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const res = await signIn("credentials", {
+            email,
+            password,
+            redirect : false
+        })
+        if(res.status === 200){
+            router.push('/')
+        }
+    }
     return (
         <div className='lg:mx-12 px-2 lg:px-60 py-24'>
             <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center">
                 <div>
-                    <Image src='/assets/images/login/login.svg' width={440} height={440} alt='login img' />
+                    <Image style={{width : 'auto', height : 'auto'}} priority={true} src='/assets/images/login/login.svg' width={440} height={440} alt='login img' />
                 </div>
                 <div className='p-2 lg:p-12 border-2 rounded-md'>
                 <h3 className='text-primary text-3xl font-semibold mb-2'>Login</h3>
-                    <form action="">
+                    <form onSubmit={handleLogin} action="">
                         <div className='input-div my-2'>
                             <label htmlFor="email">Email</label>
                             <input type="text" name='email' placeholder="Your Email" className="input input-bordered w-full" />

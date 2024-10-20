@@ -54,7 +54,7 @@ const SignupPage = () => {
                         <button className='btn rounded-full'><FaGithub className='text-slate-800' /></button>
                     </div>
                 </div>
-                <h5 className='text-center myt-4'>Have you already an account?please <Link className='font-semibold text-primary' href='/signup'>LogIn</Link></h5>
+                <h5 className='text-center myt-4'>Have you already an account?please <Link className='font-semibold text-primary' href='/login'>LogIn</Link></h5>
             </div>
         </div>
     </div>
