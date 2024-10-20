@@ -1,9 +1,15 @@
 import React from 'react';
-import {services} from '../../lib/services.js'
 import ServicesCard from '../card/ServicesCard';
 
-const Services = () => {
-    
+const getServices = async() => {
+    const res =await fetch('http://localhost:3000/services/api/get-all');
+    const services =await res.json()
+    return services;
+}
+
+const Services = async() => {
+    const data =await getServices()
+    console.log(data.res)
     return (
         <div className='lg:mx-12'>
             <div className="services-title space-y-2 lg:w-[50%] mx-auto text-center my-6">
@@ -12,8 +18,8 @@ const Services = () => {
                 <p>the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable. </p>
             </div>
            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-12'>
-           {
-                services.map(service => <ServicesCard key={service._id} service={service}></ServicesCard>)
+           { data.res.length > 0 &&
+                data.res.map(service => <ServicesCard key={service._id} service={service}></ServicesCard>)
             }
            </div>
            <button className='btn btn-outline btn-primary mx-auto block mb-12'>More Services</button>

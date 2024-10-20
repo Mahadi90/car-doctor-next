@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const ServicesCard = ({service}) => {
@@ -14,7 +15,7 @@ const ServicesCard = ({service}) => {
     <p>{des}........</p>
     <div className="card-actions justify-between items-center">
         <p className='text-primary font-bold'>Price : ${price}</p>
-      <button className="btn btn-primary">See More</button>
+      <Link href={`/services/${_id}`}><button className="btn btn-primary">See More</button></Link>
     </div>
   </div>
 </div>
