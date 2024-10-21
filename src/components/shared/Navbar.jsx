@@ -67,7 +67,7 @@ const navItems = [
         item: 'About',
     },
     {
-        path: '/service',
+        path: '/services/635a0c0b64a6d231228942ae',
         item: 'Service',
     },
     {
